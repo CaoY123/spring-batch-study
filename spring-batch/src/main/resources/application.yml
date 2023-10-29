@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: root
+    password: 123456 # 自己的数据库密码，因为是练习，不考虑加密操作
+    url: jdbc:mysql://127.0.0.1:3306/springbatch?serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 初始化数据库，文件在依赖jar包中
+  sql:
+    init:
+      schema-locations: classpath:org/springframework/batch/core/schema-mysql.sql
+#      mode: always
+      mode: never
+
+#  batch:
+#    job:
+#      enabled: false   #false表示不启动，注意启动跑批的以及在 Restful 环境启动时候的调整情况

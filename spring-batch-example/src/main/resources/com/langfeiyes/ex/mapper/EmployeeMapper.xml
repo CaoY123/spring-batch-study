@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.langfeiyes.ex.mapper.EmployeeMapper">
+
+    <resultMap id="BaseResultMap" type="com.langfeiyes.ex.domain.Employee">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="age" jdbcType="VARCHAR" property="age" />
+        <result column="sex" jdbcType="VARCHAR" property="sex" />
+    </resultMap>
+
+
+    <insert id="save" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into employee(id, name, age, sex) values(#{id},#{name},#{age},#{sex})
+    </insert>
+
+    <delete id="truncateAll">
+        truncate employee
+    </delete>
+
+    <delete id="truncateTemp">
+        truncate employee_temp
+    </delete>
+
+    <insert id="saveTemp" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into employee_temp(id, name, age, sex) values(#{id},#{name},#{age},#{sex})
+    </insert>
+
+    <select id="selectTempForList" resultMap="BaseResultMap">
+        select * from employee_temp where id between #{from} and #{to}  limit #{_pagesize} OFFSET #{_skiprows}
+    </select>
+
+</mapper>
